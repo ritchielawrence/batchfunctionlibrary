@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>DateToDOW</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="/lib/treeview/funcs.js"></script>
+<script type="text/javascript" language="JavaScript"><!--
+var newURL = self.location.protocol + '//' + self.location.host + '/lib/treeview/index.php?contents.php&' + RelativePath(self.location.pathname);
+var ua = navigator.userAgent.toLowerCase();
+if (navigator.appName == 'Microsoft Internet Explorer' && ua.indexOf('mac') > 0 && ua.indexOf('3.01') > 0) setTimeout('checkforframe()',3000);
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">DateToDOW</p>
+      <p class="boxlink">The <strong>DateToDOW</strong> function returns the day 
+        of week number for a given calendar date..</p>
+      <table width="100" border="0" cellpadding="0" cellspacing="0" bgcolor="EAF0FF">
+        <tr> 
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+          <td class="function">:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            :DateToDOW %yy% %mm% %dd% dow<br>
+            ::<br>
+            :: By: &nbsp;&nbsp;Ritchie Lawrence, 2003-04-29. Version 1.1<br>
+            ::<br>
+            :: Func: Creates a day of week number from a calendar date, where 
+            1 = Mon<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and 7 = Sun. For NT4/2000/XP/2003.<br>
+            :: <br>
+            :: Args: %1 year component to be converted, 2 or 4 digits (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%2 month component to be converted, 
+            leading zero ok (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%3 day of month to be converted, 
+            leading zero ok (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%4 var to receive day of week 
+            number, 1 to 7 (by ref)<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            setlocal ENABLEEXTENSIONS<br>
+            set yy=%1&amp;set mm=%2&amp;set dd=%3<br>
+            if 1%yy% LSS 200 if 1%yy% LSS 170 (set yy=20%yy%) else (set yy=19%yy%)<br>
+            set /a dd=100%dd%%%100,mm=100%mm%%%100<br>
+            set /a z=14-mm,z/=12,y=yy+4800-z,m=mm+12*z-3,dow=153*m+2<br>
+            set /a dow=dow/5+dd+y*365+y/4-y/100+y/400-2472630,dow%%=7,dow+=1<br>
+            endlocal&amp;set %4=%dow%&amp;goto :EOF<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</td>
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+      </table>
+      <p class="heading">Parameters</p>
+      <p><em>%1 </em>year component to be converted, 2 or 4 digits (by val)<br>
+        <em>%2</em> month component to be converted, leading zero ok (by val)<br>
+        <em>%3</em> day of month to be converted, leading zero ok (by val)<br>
+        <em> %4</em> var to receive day of week number, 1 to 7 (by ref)</p>
+      <p class="heading">Return Values</p>
+      <p>See parameters above.</p>
+      <p class="heading">Example</p>
+      <blockquote> 
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          call :GetDate y m d<br>
+          call :DateToDOW %y% %m% %d% dow<br>
+          call :DayName %dow% day<br>
+          echo/Today is %day%<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">Remarks</p>
+      <p> The <a href="DateToWeek.html">DateToWeek</a> function also returns day 
+        of week (in addition to year and month).</p>
+      <p class="heading">See Also</p>
+      <p class="boxed"><a href="DateToWeek.html">DateToWeek</a>, <a href="DayName.html">DayName</a>, 
+        <a href="DayNumber.html">DayNumber</a></p>
+      <p class="boxed">&nbsp;</p>
+      </td>
+  </tr>
+</table>
+<p class="boxed">&nbsp;</p>
+</body>
+</html>

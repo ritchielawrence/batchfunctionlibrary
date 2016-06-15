@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>DayNumber</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="/lib/treeview/funcs.js"></script>
+<script type="text/javascript" language="JavaScript"><!--
+var newURL = self.location.protocol + '//' + self.location.host + '/lib/treeview/index.php?contents.php&' + RelativePath(self.location.pathname);
+var ua = navigator.userAgent.toLowerCase();
+if (navigator.appName == 'Microsoft Internet Explorer' && ua.indexOf('mac') > 0 && ua.indexOf('3.01') > 0) setTimeout('checkforframe()',3000);
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">DayNumber</p>
+      <p class="boxlink">The <strong>DayNumber</strong> function returns the number 
+        of the day of week from the day of week name.</p>
+      <table width="100" border="0" cellpadding="0" cellspacing="0" bgcolor="EAF0FF">
+        <tr> 
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+          <td class="function">:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            :DayNumber %Weekday% dow<br>
+            ::<br>
+            :: By: &nbsp;&nbsp;Ritchie Lawrence, 2003-05-14. Version 1.0<br>
+            ::<br>
+            :: Func: Returns the day number from the name of weekday. Case insensitive<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and only the first three letters 
+            are matched, result is 1 to 7 or<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NULL if no match. For NT4/2000/XP/2003.<br>
+            :: <br>
+            :: Args: %1 Weekday name to convert to day of week number (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%2 var to receive DOW number 
+            (by ref)<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            setlocal ENABLEEXTENSIONS &amp; set i=0<br>
+            for %%a in (Mon Tue Wed Thu Fri Sat Sun) do (<br>
+            &nbsp;&nbsp;set /a i+=1 &amp; echo/%1|findstr /i /b &quot;%%a&quot; 
+            &gt;nul &amp;&amp; call set dow=%%i%%)<br>
+            endlocal&amp;set %2=%dow%&amp;goto :EOF<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</td>
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+      </table>
+      <p class="heading">Parameters</p>
+      <p><em>%1 </em>Weekday name to convert to day of week number (by val)<br>
+        <em>%2</em> var to receive DOW number (by ref)</p>
+      <p class="heading">Return Values</p>
+      <p> Function is case insensitive and only the first three letters of the 
+        day of week name are required. For example, if called with Wed, wed or 
+        Wednesday, the result is 3. If the day of week name is invalid, the return 
+        value is NULL.</p>
+      <p class="heading">Example</p>
+      <blockquote> 
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          call :DayNumber Tueday dow<br>
+          echo/Tuesday is day: %dow%<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">Remarks</p>
+      <p>Monday is day 1 and Sunday day 7.</p>
+      <p class="heading">See Also</p>
+      <p class="boxed"><a href="DayName.html">DayName</a>, <a href="DateToWeek.html">DateToWeek</a>, 
+        <a href="WeekToDate.html">WeekToDate</a></p>
+      <p class="boxed">&nbsp;</p>
+      </td>
+  </tr>
+</table>
+<p class="boxed">&nbsp;</p>
+</body>
+</html>

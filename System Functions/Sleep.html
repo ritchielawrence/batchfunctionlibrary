@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Sleep</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="/lib/treeview/funcs.js"></script>
+<script type="text/javascript" language="JavaScript"><!--
+var newURL = self.location.protocol + '//' + self.location.host + '/lib/treeview/index.php?contents.php&' + RelativePath(self.location.pathname);
+var ua = navigator.userAgent.toLowerCase();
+if (navigator.appName == 'Microsoft Internet Explorer' && ua.indexOf('mac') > 0 && ua.indexOf('3.01') > 0) setTimeout('checkforframe()',3000);
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">Sleep</p>
+      <p class="boxlink">The <strong>Sleep</strong> function suspends execution 
+        of the current batch file for a specified interval.</p>
+      <table width="100" border="0" cellpadding="0" cellspacing="0" bgcolor="EAF0FF">
+        <tr> 
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+          <td class="function">:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            :Sleep&nbsp;%secs%<br>
+            ::<br>
+            :: By: &nbsp;&nbsp;Ritchie Lawrence, 2003-09-16. Version 1.0<br>
+            ::<br>
+            :: Func: Suspends batch execution for a number of seconds.<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For NT4/2000/XP/2003.<br>
+            :: <br>
+            :: Args: %1 Number of seconds to wait for (by val)<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            setlocal ENABLEEXTENSIONS &amp; set /a n=%1+1<br>
+            ping -n %n% 127.0.0.1 &gt;nul<br>
+            endlocal &amp; goto :EOF<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</td>
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+        </tr>
+      </table>
+      <p class="heading">Parameters</p>
+      <p><em>%1 </em>Number of seconds to wait for (by val)</p>
+      <p class="heading">Return Values</p>
+      <p>See parameters above.</p>
+      <p class="heading">Example</p>
+      <blockquote> 
+        <p class="function">@echo off<br>
+          call :Sleep 5<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">Remarks</p>
+      <p>This function is based on the <a href="http://groups.google.com/groups?selm=mogjutco5rer97lh8i383ogcchemft87q4%404ax.com" target="_blank">idea 
+        by Clay Calvert</a>.</p>
+      <p class="heading">See Also</p>
+      <p><a href="Timer.html">Timer</a></p>
+      <p>&nbsp;</p>
+      </td>
+  </tr>
+</table>
+</body>
+</html>

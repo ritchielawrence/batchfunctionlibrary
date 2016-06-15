@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>FileSizeComp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="/lib/treeview/funcs.js"></script>
+<script type="text/javascript" language="JavaScript"><!--
+var newURL = self.location.protocol + '//' + self.location.host + '/lib/treeview/index.php?contents.php&' + RelativePath(self.location.pathname);
+var ua = navigator.userAgent.toLowerCase();
+if (navigator.appName == 'Microsoft Internet Explorer' && ua.indexOf('mac') > 0 && ua.indexOf('3.01') > 0) setTimeout('checkforframe()',3000);
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">FileSizeComp</p>
+      <p class="boxlink">The <strong>FileSizeComp</strong> function compares the 
+        size of a specified file.</p>
+      <table width="100" border="0" cellpadding="0" cellspacing="0" bgcolor="EAF0FF">
+        <tr> 
+          <td><img src="/lib/treeview/1x1.gif" width="10" height="1"></td>
+          <td class="function">::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            :FileSizeComp %file% %operand% %size%<br>
+            ::<br>
+            :: By: &nbsp;&nbsp;Ritchie Lawrence, 2003-08-22. Version 1.0<br>
+            ::<br>
+            :: Func: Compares size of specified file against specified size using 
+            <br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified operand. Errorlevel 
+            set to zero if result is true, and<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set to 1 if false or -1 if 
+            file not found. For NT4/2000/XP/2003.<br>
+            ::<br>
+            :: Args: %1 File to compare (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%2 Comparison operator &lt;EQU 
+            | NEQ | LSS | LEQ | GTR | GEQ&gt; (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%3 Size to compare in bytes 
+            (by val)<br>
+            ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            setlocal ENABLEEXTENSIONS &amp; set &quot;filter=2^&gt;nul^|findstr/b 
+            /v /c:&quot; &quot;&quot;<br>
+            for /f &quot;tokens=3&quot; %%a in ('dir/-c %1 %filter%') do set z=%%a 
+            0000000000000<br>
+            if not defined z (endlocal &amp; fc;: 2&gt;nul &amp; goto :EOF) else 
+            (set z=%z:~0,13%)<br>
+            set &quot;c=%3 0000000000000&quot; &amp; call set &quot;c=%%c:~0,13%%&quot;<br>
+            for /f &quot;tokens=1-4&quot; %%a in (&quot;%z% %c%&quot;) do set 
+            &quot;z=%%b%%a&quot; &amp; set &quot;c=%%d%%c&quot;<br>
+            (md;2&gt;nul &amp; if &quot;%z%&quot; %2 &quot;%c%&quot; ver&gt;nul) 
+            &amp; (endlocal &amp; goto:EOF)<br>
+            ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</td>
+          <td><img src="/lib/treeview/1x1.gif" width="10" height="1"></td>
+      </table>
+      <p class="heading">Parameters</p>
+      <p><em>%1 </em>File to compare (by val)<br>
+        <em>%2</em> Comparison operator &lt;EQU | NEQ | LSS | LEQ | GTR | GEQ&gt; 
+        (by val)<br>
+        <em>%3</em> Size to compare in bytes (by val)</p>
+      <p class="heading">Return Values</p>
+      <p>See parameters above.</p>
+      <p class="heading">Example</p>
+      <blockquote> 
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          call :FileSizeComp c:\logs\backup.log GTR 1048576 || goto :EOF<br>
+          echo/c:\logs\backup.log is larger than 1MB<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">Remarks</p>
+      <p>The comparison operator (parameter 2) must be uppercase otherwise the 
+        function will fail under Windows NT 4.0. If a non Windows NT 4.0 solution 
+        is required, it is more efficient to use the enhanced parameter modifiers 
+        present in Windows 2000 and later. For example:-</p>
+      <blockquote> 
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          for %%a in (c:\logs\backup.log) do if %%~za LEQ 1048576 goto :EOF<br>
+          echo/c:\logs\backup.log is larger than 1MB<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">See Also</p>
+      <p class="boxed">&nbsp;</p>
+      </td>
+  </tr>
+</table>
+</body>
+</html>

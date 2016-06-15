@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>DateToSecs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="/lib/treeview/funcs.js"></script>
+<script type="text/javascript" language="JavaScript"><!--
+var newURL = self.location.protocol + '//' + self.location.host + '/lib/treeview/index.php?contents.php&' + RelativePath(self.location.pathname);
+var ua = navigator.userAgent.toLowerCase();
+if (navigator.appName == 'Microsoft Internet Explorer' && ua.indexOf('mac') > 0 && ua.indexOf('3.01') > 0) setTimeout('checkforframe()',3000);
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">DateToSecs</p>
+      <p class="boxlink">The <strong>DateToSecs</strong> function converts a calendar 
+        date to the number of seconds elapsed since 1970-01-01 00:00:00.</p>
+      <table width="100" border="0" cellpadding="0" cellspacing="0" bgcolor="EAF0FF">
+        <tr> 
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+          <td class="function">:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            :DateToSecs %yy% %mm% %dd% %hh% %nn% %ss% secs<br>
+            ::<br>
+            :: By: &nbsp;&nbsp;Ritchie Lawrence, updated 2002-08-13. Version 1.1<br>
+            ::<br>
+            :: Func: Returns number of seconds elapsed since 1st January 1970 
+            00:00:00<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for a given calendar date
+            and time of day. For NT4/2000/XP/2003.<br>
+            :: <br>
+            :: Args: %1 year to convert, 2 or 4 digit (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%2 month to convert, 1/01 to 
+            12, leading zero ok (by val)<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %3 day of month to convert, 
+            1/01 to 31, leading zero ok (by val)<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %4 hours to convert, 1/01 to 
+            12 for 12hr times (minutes must be<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;suffixed 
+            by 'a' or 'p', 0/00 to 23 for 24hr clock (by val)<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %5 mins to convert, 00-59 only, 
+            suffixed by a/p if 12hr (by val)<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %6 secs to convert, 0-59 or 
+            00-59 (by val)<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %7 var to receive number of 
+            elapsed seconds (by ref)<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            setlocal ENABLEEXTENSIONS<br>
+            set yy=%1&amp;set mm=%2&amp;set dd=%3&amp;set hh=%4&amp;set nn=%5&amp;set 
+            ss=%6<br>
+            if 1%yy% LSS 200 if 1%yy% LSS 170 (set yy=20%yy%) else (set yy=19%yy%)<br>
+            set /a dd=100%dd%%%100,mm=100%mm%%%100<br>
+            set /a z=14-mm,z/=12,y=yy+4800-z,m=mm+12*z-3,j=153*m+2<br>
+            set /a j=j/5+dd+y*365+y/4-y/100+y/400-2472633<br>
+            if 1%hh% LSS 20 set hh=0%hh%<br>
+            if {%nn:~2,1%} EQU {p} if &quot;%hh%&quot; NEQ &quot;12&quot; set 
+            hh=1%hh%&amp;set/a hh-=88<br>
+            if {%nn:~2,1%} EQU {a} if &quot;%hh%&quot; EQU &quot;12&quot; set 
+            hh=00<br>
+            if {%nn:~2,1%} GEQ {a} set nn=%nn:~0,2%<br>
+            set /a hh=100%hh%%%100,nn=100%nn%%%100,ss=100%ss%%%100<br>
+            set /a j=j*86400+hh*3600+nn*60+ss<br>
+            endlocal&amp;set %7=%j%&amp;goto :EOF<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</td>
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+        </tr>
+      </table>
+      <p class="heading">Parameters</p>
+      <p><em>%1</em> year to convert, 2 or 4 digit (by val)<br>
+        <em>%2</em> month to convert, 1/01 to 12, leading zero ok (by val)<br>
+        <em>%3</em> day of month to convert, 1/01 to 31, leading zero ok (by val)<br>
+        <em>%4</em> hours to convert, 1/01 to 12 for 12hr times (minutes must 
+        be suffixed by 'a' or 'p', 0/00 to 23 for 24hr clock (by val)<br>
+        <em>%5</em> mins to convert, 00-59 only, suffixed by a/p if 12hr (by val)<br>
+        <em>%6</em> secs to convert, 0-59 or 00-59 (by val)<em><br>
+        %7</em> var to receive number of elapsed seconds (by ref)</p>
+      <p class="heading">Return Values</p>
+      <p>See parameters above.</p>
+      <p class="heading">Example</p>
+      <blockquote> 
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          call :GetDate y m d<br>
+          call :GetTime h n s t<br>
+          call :DateToSecs %y% %m% %d% %h% %n% %s% secs<br>
+          echo/%secs% seconds have elapsed since 1970-01-01 00:00:00<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">Remarks</p>
+      <p>Use in conjunction with the <a href="secstodate.html">SecsToDate</a> 
+        function to perform date arithmetic with a resolution of one second. Note 
+        many Windows registry dates are stored as seconds elapsed since 1970-01-01 
+        00:00:00 UTC.<br>
+      </p>
+      <p>Date range is from 1970-01-01 00:00:00 to 2038-01-19 03:14:07 which gives 
+        a range of 0 to 2147483647 or (2^31)-1 seconds.</p>
+      <p class="heading">See Also</p>
+      <p class="boxed"><a href="secstodate.html">SecsToDate</a></p>
+      </td>
+  </tr>
+</table>
+<p class="boxed">&nbsp;</p>
+</body>
+</html>

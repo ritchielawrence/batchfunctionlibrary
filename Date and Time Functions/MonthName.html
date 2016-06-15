@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>MonthName</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="/lib/treeview/funcs.js"></script>
+<script type="text/javascript" language="JavaScript"><!--
+var newURL = self.location.protocol + '//' + self.location.host + '/lib/treeview/index.php?contents.php&' + RelativePath(self.location.pathname);
+var ua = navigator.userAgent.toLowerCase();
+if (navigator.appName == 'Microsoft Internet Explorer' && ua.indexOf('mac') > 0 && ua.indexOf('3.01') > 0) setTimeout('checkforframe()',3000);
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">MonthName</p>
+      <p class="boxlink">The <strong>MonthName</strong> function returns the name 
+        of month from the month number.</p>
+      <table width="100" border="0" cellpadding="0" cellspacing="0" bgcolor="EAF0FF">
+        <tr> 
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+          <td class="function">:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            :MonthName %mm% month<br>
+            ::<br>
+            :: By: &nbsp;&nbsp;Ritchie Lawrence, 2002-10-04. Version 1.0<br>
+            ::<br>
+            :: Func: Returns the name of month from the number of the month.<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For NT4/2000/XP/2003.<br>
+            :: <br>
+            :: Args: %1 month number convert to name of month, 1 or 01 to 12 (by 
+            val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%2 var to receive name of month 
+            (by ref)<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            setlocal ENABLEEXTENSIONS&amp;set /a m=100%1%%100<br>
+            for /f &quot;tokens=%m%&quot; %%a in ('echo/January February March 
+            April May June^<br>
+            &nbsp;&nbsp;July August September October November December'<br>
+            ) do endlocal&amp;set %2=%%a&amp;goto :EOF<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</td>
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+        </tr>
+      </table>
+      <p class="heading">Parameters</p>
+      <p><em>%1</em> month number convert to name of month, 1 or 01 to 12 (by 
+        val)<br>
+        <em> %2</em> var to receive name of month (by ref)</p>
+      <p class="heading">Return Values</p>
+      <p>See parameters above.</p>
+      <p class="heading">Example</p>
+      <blockquote> 
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          call :GetDate yy mm dd<br>
+          call :MonthName %mm% month<br>
+          echo/The current month is: %month%<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">Remarks</p>
+      <p>The returned month name is the full name of the month with the first 
+        letter capitalised.</p>
+      <p class="heading">See Also</p>
+      <p class="boxed"><a href="MonthNumber.html">MonthNumber</a></p>
+      <p class="boxed">&nbsp;</p>
+      </td>
+  </tr>
+</table>
+<p class="boxed">&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Batch Function Overview</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> <p class="title">Batch Function Overview </p>
+      <p class="heading">What are they?</p>
+      <p>A batch function is a block of batch code that can be called by a batch 
+        file, optionally with a number of parameters. The function performs its 
+        task without unintentionally modifying variables outside of its own scope, 
+        and then returns control to the statement following the one that called 
+        the function.</p>
+      <p class="heading">Why use them?</p>
+      <p>The primary benefit of functions is reusable code. Once a function has
+        been written, it can be used over and over again. This reduces the time
+        spent developing and debugging scripts.</p>
+      <p> Scripts that use functions naturally have a modular structure and use 
+        fewer 'global' variables, therefore they are much easier to understand, 
+        debug and maintain.</p>
+      <p class="heading">What do they look like? </p>
+      <p>All the functions in the library are based on the following
+        template:-</p>
+      <blockquote>
+        <p class="function">:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+    :&lt;Function Name&gt; &lt;Parameter list&gt;<br>
+    ::<br>
+    :: By:&nbsp;&nbsp; &lt;Author/date/version information&gt;<br>
+    ::<br>
+    :: Func: &lt;Function description&gt;<br>
+    :: <br>
+    :: Args: &lt;Argument description&gt;<br>
+    :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+    setlocal ENABLEEXTENSIONS<br>
+&lt;Body of function&gt;<br>
+    endlocal&amp;&lt;Set return values&gt;&amp;goto :EOF<br>
+    :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+      </blockquote>
+      <table width="100%" border="1" cellspacing="2" cellpadding="3">
+        <tr>
+          <td valign="top">&lt;Function name&gt;</td>
+          <td valign="top">Name of the function, eg GetDate</td>
+        </tr>
+        <tr>
+          <td valign="top">&lt;Parameter list&gt;</td>
+          <td valign="top">List of arguments. This list <strong>only</strong> serves
+            as a reminder of how to call the function (everything after the function
+            name is ignored by the command interpreter)</td>
+        </tr>
+        <tr>
+          <td valign="top">&lt;Author/date/version information&gt;</td>
+          <td valign="top">Self explanatory</td>
+        </tr>
+        <tr>
+          <td valign="top">&lt;Function description&gt;</td>
+          <td valign="top">Brief explanation of what the function does and which
+            platforms it has been designed for (NT4, W2K or XP)</td>
+        </tr>
+        <tr>
+          <td valign="top">&lt;Argument description&gt;</td>
+          <td valign="top">Detailed description of the functions arguments</td>
+        </tr>
+        <tr>
+          <td valign="top">&lt;Body of function&gt;</td>
+          <td valign="top">This is where the function performs its main purpose</td>
+        </tr>
+        <tr>
+          <td valign="top">&lt;Set return values&gt;</td>
+          <td valign="top">This is where the function 'returns' any local values
+            back to the calling routine</td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</body>
+</html>

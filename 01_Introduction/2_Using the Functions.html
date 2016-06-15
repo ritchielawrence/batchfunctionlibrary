@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Using the Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> <p class="title">Using the Functions</p>
+      <p class="heading">Copy the Function</p>
+      <p>To use any of the functions, just copy and paste them to the end of your 
+        batch file. To prevent the function(s) from being executed after your 
+        main batch file code has run, add <span class="function">goto :EOF</span> 
+        after your main batch file code but before the function(s). For example:-</p>
+      <blockquote> 
+        <p><strong>Example 1a</strong></p>
+        <p class="function"> &nbsp;&lt;-- Your main batch file code goes here<br>
+          goto :EOF<br>
+          &nbsp;&lt;-- 1st function here<br>
+          &nbsp;&lt;-- 2nd function here<br>
+          &nbsp;&lt;-- and so on...</p>
+      </blockquote>
+      <p><font color="#FF0000">[The documentation for each function includes an 
+        example that demonstrates how the function should be called. In these 
+        examples the actual function itself has been omitted to avoid unnecessarily 
+        duplicating code. When using any of the examples, remember to append the 
+        function to the end of your batch file.]</font></p>
+      <p class="heading">Calling the Function</p>
+      <p>The documentation for each function describes the number of required
+         and optional parameters, the type of data each parameter should contain
+         and whether the parameter must be passed 'by value' or 'by reference'.
+        Both terms are used very loosely here and the reason is covered
+        in great detail in the next section. Suffice to say that to pass a variable
+        by value, call the function with a constant or expanded variable. And
+        to pass by reference, call the function with the name of a variable. </p>
+      <p class="heading">By Value</p>
+      <p>To pass a parameter 'by value', either call the function with a constant
+         or an expanded variable that contains the value. As an example, the <a href="../../treeview/Sleep.html">Sleep</a> 
+        function expects one parameter (a number of seconds) to be passed by
+        value.  Here are three ways to call the <a href="../../treeview/Sleep.html">Sleep</a> 
+        function with the value 9:-</p>
+      <blockquote> 
+        <p><strong>Example 2a</strong></p>
+        <p class="function"> call :Sleep 9</p>
+        <p>&nbsp;</p>
+        <p><strong>Example 2b</strong></p>
+        <p class="function"> set AnyVarName=9<br>
+          call :Sleep %AnyVarName%</p>
+        <p>&nbsp;</p>
+        <p><strong>Example 2c</strong></p>
+        <p class="function"> call :Sleep %1</p>
+      </blockquote>
+      <p>Notes: In example 2b, practically any variable name could have been used. 
+        Example 2c assumes the value of 9 was passed to the batch file as a commandline 
+        parameter.</p>
+      <p class="heading">By Reference</p>
+      <p>To pass a value 'by reference' simply use the name of a variable. As 
+        an example, the <a href="../Date%20and%20Time%20Functions/GetDate.html">GetDate</a> 
+        function expects three parameters, all passed by reference. Here's how 
+        to call the <a href="../Date%20and%20Time%20Functions/GetDate.html">GetDate</a> 
+        function and use the 'returned' values:-</p>
+      <blockquote> 
+        <p class="heading">Example 3a</p>
+        <p class="function">call :GetDate yy mm dd<br>
+          echo/Todays date is: %yy%-%mm%-%dd%</p>
+      </blockquote>
+      <p>Note that although example 3a used the variable names <span class="function">yy</span>, 
+        <span class="function">mm</span> and <span class="function">dd</span>, 
+        practically any variable names could have been used. For instance, example 
+        3b is functionally equivalent to example 3a (but not so easy to understand).</p>
+      <blockquote> 
+        <p class="heading">Example 3b</p>
+        <p class="function">call :GetDate x y z<br>
+          echo/Todays date is: %x%-%y%-%z%</p>
+      </blockquote>
+      <blockquote>&nbsp;</blockquote></td>
+  </tr>
+</table>
+</body>
+</html>

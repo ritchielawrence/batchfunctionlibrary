@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>MinsToDate</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="/lib/treeview/funcs.js"></script>
+<script type="text/javascript" language="JavaScript"><!--
+var newURL = self.location.protocol + '//' + self.location.host + '/lib/treeview/index.php?contents.php&' + RelativePath(self.location.pathname);
+var ua = navigator.userAgent.toLowerCase();
+if (navigator.appName == 'Microsoft Internet Explorer' && ua.indexOf('mac') > 0 && ua.indexOf('3.01') > 0) setTimeout('checkforframe()',3000);
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">MinsToDate</p>
+      <p class="boxlink">The <strong>MinsToDate</strong> function converts the 
+        number of minutes elapsed since 1970-01-01 00:00 to a calendar date and 
+        time.</p>
+      <table width="100" border="0" cellpadding="0" cellspacing="0" bgcolor="EAF0FF">
+        <tr> 
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+          <td class="function">:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            :MinsToDate %mins% yy mm dd hh nn<br>
+            ::<br>
+            :: By:&nbsp;&nbsp; Ritchie Lawrence, updated 2003-07-13. Version 1.1<br>
+            ::<br>
+            :: Func: Returns a calendar date and time of day from the number of<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elapsed minutes since 1st January 1970 00:00.<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            For NT4/2000/XP/2003.<br>
+            :: <br>
+            :: Args: %1 minutes used to create calendar date and time of day (by 
+            val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%2 var to receive year, 4 digits 
+            for all typical dates (by ref)<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %3 var to receive month, 2 
+            digits, 01 to 12 (by ref)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%4 var to receive day of month, 
+            2 digits, 01 to 31 (by ref)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%5 var to receive hours, 2 
+            digits, 00 to 23 (by ref)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%6 var to receive minutes, 
+            2 digits, 00 to 59 (by ref)<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            setlocal ENABLEEXTENSIONS<br>
+            set /a i=%1,nn=i%%60,i/=60,hh=i%%24,dd=i/24,i/=24<br>
+            set /a a=i+2472632,b=4*a+3,b/=146097,c=-b*146097,c/=4,c+=a<br>
+            set /a d=4*c+3,d/=1461,e=-1461*d,e/=4,e+=c,m=5*e+2,m/=153,dd=153*m+2,dd/=5<br>
+            set /a dd=-dd+e+1,mm=-m/10,mm*=12,mm+=m+3,yy=b*100+d-4800+m/10<br>
+            (if %mm% LSS 10 set mm=0%mm%)&amp;(if %dd% LSS 10 set dd=0%dd%)<br>
+            (if %hh% LSS 10 set hh=0%hh%)&amp;(if %nn% LSS 10 set nn=0%nn%)<br>
+            endlocal&amp;set %6=%nn%&amp;set %5=%hh%&amp;set %4=%dd%&amp;^<br>
+            set %3=%mm%&amp;set %2=%yy%&amp;goto :EOF<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</td>
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+        </tr>
+      </table>
+      <p class="heading">Parameters</p>
+      <p><em>%1</em> minutes used to create calendar date and time of day (by 
+        val)<br>
+        <em>%2</em> var to receive year, 4 digits for all typical dates (by ref)<br>
+        <em>%3</em> var to receive month, 2 digits, 01 to 12 (by ref)<br>
+        <em>%4</em> var to receive day of month, 2 digits, 01 to 31 (by ref)<br>
+        <em>%5</em> var to receive hours, 2 digits, 00 to 23 (by ref)<br>
+        <em> %6</em> var to receive minutes, 2 digits, 00 to 59 (by ref)</p>
+      <p class="heading">Return Values</p>
+      <p>See parameters above.</p>
+      <p class="heading">Example</p>
+      <blockquote> 
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          call :GetDate y m d<br>
+          call :GetTime h n s t<br>
+          call :DateToMins %y% %m% %d% %h% %n% mins<br>
+          set /a mins+=15<br>
+          call :MinsToDate %mins% y m d h n<br>
+          echo/Date and time in 15 minutes: %y%-%m%-%d% %h%:%n%<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">Remarks</p>
+      <p>Use in conjunction with <a href="datetomins.html">DateToMins</a> to perform 
+        date arithmetic with a resolution of one minute.</p>
+      <p>Range is from 0 to 2147483647 or (2^31)-1 minutes, which gives a date 
+        range from 1970-01-01 00:00 to 6053-01-23 02:07.</p>
+      <p class="heading">See Also</p>
+      <p class="boxed"><a href="datetomins.html">DateToMins</a></p>
+      </td>
+  </tr>
+</table>
+<p class="boxed">&nbsp;</p>
+</body>
+</html>

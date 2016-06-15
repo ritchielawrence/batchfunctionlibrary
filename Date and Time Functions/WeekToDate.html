@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>WeekToDate</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" src="/lib/treeview/funcs.js"></script>
+<script type="text/javascript" language="JavaScript"><!--
+var newURL = self.location.protocol + '//' + self.location.host + '/lib/treeview/index.php?contents.php&' + RelativePath(self.location.pathname);
+var ua = navigator.userAgent.toLowerCase();
+if (navigator.appName == 'Microsoft Internet Explorer' && ua.indexOf('mac') > 0 && ua.indexOf('3.01') > 0) setTimeout('checkforframe()',3000);
+//--></script>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">WeekToDate</p>
+      <p class="boxlink">The <strong>WeekToDate</strong> function returns a calendar 
+        date from an <a href="../../treeview/8601v2000b.pdf">ISO 8601</a> Week 
+        date.</p>
+      <table width="100" border="0" cellpadding="0" cellspacing="0" bgcolor="EAF0FF">
+        <tr> 
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+          <td class="function">::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+            <br>
+            :WeekToDate %yn% %cw% %dw% yy mm dd<br>
+            ::<br>
+            :: By: &nbsp;&nbsp;Ritchie Lawrence, 2002-10-04. Version 1.0<br>
+            ::<br>
+            :: Func: Returns a calendar date from an ISO 8601 Week date.<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For NT4/2000/XP/2003.<br>
+            :: <br>
+            :: Args: %1 year to convert, 2 or 4 digits (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%2 calendar week to convert, 
+            2 digits, 01 to 53 (by val)<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %3 day of week to convert, 
+            1 digit, 1 to 7 (by val)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%4 var to receive year, 4 digits 
+            (by ref)<br>
+            ::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %5 var to receive month, 2 
+            digits, 01 to 12 (by ref)<br>
+            :: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%6 var to receive day of month, 
+            2 digits, 01 to 31 (by ref)<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br>
+            setlocal ENABLEEXTENSIONS<br>
+            set yn=%1&amp;set cw=%2&amp;set dw=%3<br>
+            if 1%yy% LSS 200 if 1%yy% LSS 170 (set yy=20%yy%) else (set yy=19%yy%)<br>
+            set /a cw=100%cw%%%100,d=3210654<br>
+            set /a z=14-1,z/=12,y=yn+4800-z,m=1+12*z-3,Jt=153*m+2<br>
+            set /a Jt=Jt/5+1+y*365+y/4-y/100+y/400-32045,wt=Jt%%7<br>
+            call set at=%%d:~%wt%,1%%&amp;set /a Jt=at+Jt-3 <br>
+            set /a Jt=Jt+7*cw+dw-9,a=Jt+32045,b=4*a+3,b/=146097,c=-b*146097,c/=4,c+=a<br>
+            set /a d=4*c+3,d/=1461,e=-1461*d,e/=4,e+=c,m=5*e+2,m/=153,dd=153*m+2,dd/=5<br>
+            set /a dd=-dd+e+1,mm=-m/10,mm*=12,mm+=m+3,yy=b*100+d-4800+m/10<br>
+            (if %mm% LSS 10 set mm=0%mm%)&amp;(if %dd% LSS 10 set dd=0%dd%)<br>
+            endlocal&amp;set %4=%yy%&amp;set %5=%mm%&amp;set %6=%dd%&amp;goto 
+            :EOF<br>
+            :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<br></td>
+          <td><img src="../../images/1x1.gif" width="10" height="1"></td>
+        </tr>
+      </table>
+      <p class="heading">Parameters</p>
+      <p><em>%1</em> year to convert, 2 or 4 digits (by val)<br>
+        <em>%2</em> calendar week to convert, 2 digits, 01 to 53 (by val)<br>
+        <em>%3</em> day of week to convert, 1 digit, 1 to 7 (by val)<br>
+        <em>%4</em> var to receive year, 4 digits (by ref)<br>
+        <em>%5</em> var to receive month, 2 digits, 01 to 12 (by ref)<br>
+        <em> %6</em> var to receive day of month, 2 digits, 01 to 31 (by ref)</p>
+      <p class="heading">Return Values</p>
+      <p>See parameters above.</p>
+      <p class="heading">Example</p>
+      <blockquote> 
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          call :WeekToDate 2000 15 2 yy mm dd<br>
+          echo/The date on day 2 of week 15 of the year 2000 is: %yy%-%mm%-%dd%<br>
+          goto :EOF</p>
+      </blockquote>
+      <p class="heading">Remarks</p>
+      <p>None.</p>
+      <p class="heading">See Also</p>
+      <p class="boxed"><a href="DateToWeek.html">DateToWeek</a></p>
+      <p class="boxed">&nbsp;</p>
+      </td>
+  </tr>
+</table>
+<p class="boxed">&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Reading Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">Reading Files </p>
+      <p class="boxlink">This page shows how to read specific lines from a
+        text file. There are many ways to have the for /f command read the input
+        file, for instance:-</p>
+      <blockquote>
+        <p class="function">for /f &quot;delims=&quot; %%a in (input.txt) do ...</p>
+        <p class="function">for /f &quot;delims=&quot; %%a in ('type input.txt')
+          do ... </p>
+        <p class="function">for /f &quot;delims=&quot; %%a in ('more ^&lt; input.txt')
+          do ... </p>
+      </blockquote>      
+      <p class="boxlink">However, only the last method (using the <span class="function">more</span> command)
+        will give consistent results across Windows NT, 2000, XP and 2003. The
+        first method does not recognise unicode files. Also, the <span class="function">usebackq</span> switch
+        must be used if the input filename contains spaces. The second method,
+        using the <span class="function">type</span> command, also fails to recognise
+        unicode files on Windows 2000, XP and 2003 if the input file does not
+        begin with a bit order mark (BOM).</p>
+      <p class="boxlink">In all the examples, assume the contents of of the
+          file <span class="function">numbers.txt</span> to
+          be:-</p>      <blockquote>
+        <p class="function">one<br>
+          two<br>
+          three<br>
+          four<br>
+          five<br>
+          six<br>
+          seven<br>
+          eight<br>
+          nine<br>
+        ten</p>
+      </blockquote>            <p class="heading">Displaying  the first line</p>
+      <p>This example prints <span class="function">one</span>.</p>      <blockquote>
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          set &quot;first=&quot;<br>
+          for /f &quot;delims=&quot; %%a in ('more ^&lt; numbers.txt') do (<br>
+  &nbsp;&nbsp;if not defined first set first=%%a<br>
+  )<br>
+  echo/%first%</p>
+      </blockquote>      
+      <p class="heading">Displaying the first X lines</p>
+      <p>This example prints <span class="function">one</span>, <span class="function">two</span> and <span class="function">three</span>.</p>
+      <blockquote>
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+    set &quot;lines=3&quot;<br>
+          set i=-1<br>
+          set &quot;ok=&quot;
+          <br>
+          <span class="function">for /f &quot;delims=&quot; %%a in ('more ^&lt; numbers.txt')
+            do (<br>
+          &nbsp;&nbsp;set/a i+=1 &amp; for /f %%z in ('echo/%%i%%') do (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if &quot;%%z&quot;==&quot;%lines%&quot; set ok=1<br>
+    &nbsp;&nbsp;)<br>
+    &nbsp;&nbsp;if not defined ok echo/%%a<br>
+    )</span></p>
+      </blockquote>      <p class="heading">Displaying  the last line</p>
+      <p class="boxlink">This example prints <span class="function">ten</span>. </p>
+      <blockquote>
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          for /f &quot;delims=&quot; %%a in ('more ^&lt; numbers.txt') do set &quot;last=%%a&quot;<br>
+          echo/%last%        </p>
+      </blockquote>            <p class="heading">Displaying the last X lines</p>
+      <p class="boxlink">This example prints <span class="function">nine</span> and <span class="function">ten</span>. </p>
+      <blockquote>
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          set &quot;lines=2&quot;<br>
+          for /f %%a in ('find/c /v &quot;&quot; ^&lt; numbers.txt') do set/a
+            skip=%%a-lines<br>
+          for /f &quot;delims=&quot; %%a in ('more/e +%skip% ^&lt; numbers.txt')
+          do (<br>
+&nbsp;&nbsp;echo/%%a<br>
+  )</p>
+      </blockquote>
+      <p class="heading">Displaying  the Nth line</p>      
+      <p>This example prints <span class="function">three</span>.
+        Note that instead of using the <span class="function">more</span> command's <span class="function">/e</span> switch,
+        the <span class="function">skip</span> option could have been used with
+        the <span class="function">for
+        /f</span> command, however, this fails is it is set to any number less
+        than one. </p>      <blockquote>
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          set LineNo=3<br>
+          set &quot;line=&quot;<br>
+          set/a LineNo-=1<br>
+          for /f &quot;delims=&quot; %%a in ('more/e +%LineNo% ^&lt; numbers.txt')
+          do (<br>
+&nbsp;&nbsp;if not defined line set &quot;line=%%a&quot;<br>
+  )<br>
+  echo/%line%</p>
+        </blockquote>      <p class="heading">Displaying the Nth line plus X number of lines </p>
+      <p>This example prints <span class="function">five</span> and <span class="function">six</span>. </p>
+      <blockquote>
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          set start=5<br>
+          set &quot;lines=2&quot;<br>
+          set/a i=-1,start-=1<br>
+          set &quot;ok=&quot; <br>
+          for /f &quot;delims=&quot; %%a in ('more/e +%start% ^&lt; numbers.txt')
+          do (<br>
+          &nbsp;&nbsp;set/a i+=1 &amp; for /f %%z in ('echo/%%i%%') do (<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;if &quot;%%z&quot;==&quot;%lines%&quot; set ok=1<br>
+  &nbsp;&nbsp;)<br>
+  &nbsp;&nbsp;if not defined ok echo/%%a<br>
+  )<br>
+        </p>
+    </blockquote></td>
+  </tr>
+</table>
+</body>
+</html>

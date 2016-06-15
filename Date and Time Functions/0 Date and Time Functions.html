@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Introduction to Date and Time Functions</title>
+<link href="../lib.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td><p class="title">Date and Time Functions</p>
+      <p><span class="title"><span class="heading"> Overview</span></span></p>
+      <p>Note: Any attempt to optimise the arithmetic used in these functions 
+        will probably cause the functions to fail under NT4 - as contrary to Microsoft's 
+        documentation, parantheses are not supported and arithmetic operator precedence 
+        is incorrect.<span class="title"> </span></p>
+      <p class="heading">Parameters</p>
+      <p>When passing dates and times to the Date and Times Functions, the following 
+        formats must be observed:-</p>
+      <ul>
+        <li><em>Years</em> must be two or four digits. Years in the range 70 to 
+          99 will be treated as years from the twentieth century, years from 00 
+          to 69 as the twenty-first.</li>
+        <li><em>Months</em> must be one or two digits in the range 1 to 12 or 
+          01 to 12.</li>
+        <li><em>Day of month</em> must be one or two digits in the range 1 to 
+          31 or 01 to 31.</li>
+        <li><em>Hours</em> must be in 12 or 24 hour format. For 12 hour format 
+          the hours must be in the range 1 to 12 or 01 to 12. If 12 hour format 
+          is used, then the minutes parameter must be immediately followed by 
+          'a' or 'p' (eg 00a or 34p). For 24 hour format, the hours must be in 
+          the range 0 to 23 or 00 to 23.</li>
+        <li><em>Minutes</em> must be two digits in the range 00 to 59.</li>
+        <li><em>Seconds</em> must be two digits in the range 00 to 59.</li>
+      </ul>
+      <p>The reason for accepting two digit years and 12 hour times is mainly 
+        for compatibilty with the output of the DIR command, which may use one 
+        or both of these formats.</p>
+      <p class="heading">Return Values</p>
+      <p>The Date and Time Functions that return dates and/or times will use the 
+        following formats:-</p>
+      <ul>
+        <li><em>Years</em> will be four digits.</li>
+        <li><em>Months</em> will be two digits in the range 01 to 12.</li>
+        <li><em>Day of month</em> will be two digits in the range 01 to 31.</li>
+        <li><em>Hours</em> will be 24 hour format in the range 00 to 23.</li>
+        <li><em>Minutes</em> will be two digits in the range 00 to 59.</li>
+        <li><em>Seconds</em> will be two digits in the range 00 to 59.</li>
+      </ul>
+      <p>These formats will be suitable for most applications and make it simple 
+        to use ISO 8601 formatted dates. Any leading zeros can be easily removed 
+        if required by prefixing the value with 100 and then taking modulus 100. 
+        For example:-</p>
+      <blockquote>
+        <p class="function">@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          set var=09<br>
+          set /a var=100%var%%%100<br>
+          echo/Leading zero has been removed: %var%</p>
+      </blockquote>
+      <p class="heading">Suggested Formats</p>
+      <p>This is basically a very brief summary of the most commonly used date 
+        and time formats suggested by ISO 8601.</p>
+      <table width="100%" border="0" cellspacing="2" cellpadding="3">
+        <tr bgcolor="#D4D8E0"> 
+          <td><strong>Component</strong></td>
+          <td><strong>Basic Format</strong></td>
+          <td><strong>Extended Format</strong></td>
+        </tr>
+        <tr bgcolor="#EBEBEB"> 
+          <td><strong>Calendar Date</strong></td>
+          <td>YYYYMMDD Eg 19991231</td>
+          <td>YYYY-MM-DD Eg 1999-12-31</td>
+        </tr>
+        <tr bgcolor="#EBEBEB"> 
+          <td><strong>Time of day</strong></td>
+          <td>hhmmss Eg 235909</td>
+          <td>hh:mm:ss Eg 23:59:09</td>
+        </tr>
+        <tr bgcolor="#EBEBEB"> 
+          <td><strong>Date and Time</strong></td>
+          <td>YYYYMMDDThhmmss<br>
+            Eg 19991231T235909</td>
+          <td>YYYY-MM-DDThh:mm:ss<br>
+            Eg 1999-12-31T23:59:09</td>
+        </tr>
+        <tr bgcolor="#EBEBEB"> 
+          <td><strong>Ordinal Date </strong></td>
+          <td>YYYYDDD Eg 1999365</td>
+          <td>YYYY-DDD Eg 1999-365</td>
+        </tr>
+        <tr bgcolor="#EBEBEB"> 
+          <td><strong>Week Date</strong></td>
+          <td>YYYYWwwD Eg 1999W525</td>
+          <td>YYYY-Www-D Eg 1999-W52-5 </td>
+        </tr>
+      </table>
+      <p><span class="heading">References</span></p>
+      <p> <a href="http://heasarc.gsfc.nasa.gov/cgi-bin/Tools/DateConv/dateconv.pl" target="_blank">HEASARC 
+        online date converter</a><br>
+        <a href="http://www.hermetic.ch/cal_stud.htm" target="_blank">Calendar 
+        studies and conversion algorithms</a><br>
+        <a href="http://www.cl.cam.ac.uk/%7emgk25/iso-time.html" target="_blank">Summary 
+        of ISO 8601 Date and Time Standards</a><br>
+        <a href="https://www.iso.org/obp/ui/#iso:std:40874:en" target="_blank">ISO 8601:2004 in PDF</a><br>
+       </td>
+  </tr>
+</table>
+<p class="boxed">&nbsp;</p>
+</body>
+</html>

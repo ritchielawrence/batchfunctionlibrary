@@ -1,0 +1,258 @@
+<html>
+<head>
+<title>Batch Functions Explained</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../lib.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+<!--
+.style1 {color: #FF0000}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" onLoad="checkforframe()">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <p class="title"><span class="title">Batch Functions Explained</span></p>
+      <p class="heading"><span class="heading">Passing Arguments</span></p>
+      <p>Most high-level programming languages allow arguments to be passed to
+        functions 'by value' and 'by reference'. Passing by value means that
+        the function receives a copy of the arguments value. Any changes made
+         to this copy by the function do no affect the original variable.</p>
+      <p> When a variable is passed by reference, the function
+        receives a pointer to the original variable, and loosely speaking, changes
+        made to this pointer by the function do affect the original variable.</p>
+      <p>In the batch programming language  variables
+        are  passed by reference. Unfortunately the pointers to the original
+        variables are read only and consequently cannot be assigned values and
+        therefore are unable to alter the variable which they point to.</p>
+      <p> The good news is that with a
+          little ingenuity, the batch language can be coerced into passing variables
+          by value and by reference in a similar way to high-level languages
+        such as C and Visual Basic.</p>
+      <p class="heading">By Value </p>
+      <p>Below is a very simple example  showing how to
+        pass an argument by value and how that value is then read by  the function. </p>
+      <blockquote> 
+        <p class="function">1. @echo off &amp; setlocal ENABLEEXTENSIONS <br>
+          2. set str=Hello<br>
+          3. call :demoA %str%<br>
+          4. goto :EOF<br>
+          5.<br>
+          6. :demoA<br>
+          7. echo/%1<br>
+        8. goto :EOF</p>
+      </blockquote>
+      <p>In line 3, <span class="function">%str%</span> is expanded to <span class="function">Hello</span>,
+        and then the memory location of where  <span class="function">Hello</span> is
+        actually stored is assigned  to <span class="function">%1</span>. Line
+        7 then references <span class="function">%1</span> which is then expanded
+        to <span class="function">Hello</span>.</p>
+      <p> If two or more arguments were being passed, they
+          could be referenced using <span class="function">%2</span>, <span class="function">%3</span> and
+          so on, all the way up to <span class="function">%9</span>. If more
+          than nine variables were being passed, then to reference the tenth,
+          the <span class="function">shift</span> command
+          would have to be used.</p>
+      <p> <span class="function">shift</span> effectively
+          increments all the pointers. Before
+          <span class="function">shift</span> is used, <span class="function">%0</span> points
+          to the name of the function or routine and <span class="function">%1</span> points
+          to the first argument. After <span class="function">shift</span> is
+          used, <span class="function">%0</span> points to what <span class="function">%1</span> used
+          to point to, <span class="function">%1</span> points
+          to what <span class="function">%2</span> used to point to and so on.
+          The tenth argument can now be referenced using <span class="function">%9</span>.</p>
+      <p class="heading">By Reference</p>
+      <p>Here is a slighty different version of the example above. Instead
+        of passing the value <span class="function">Hello</span> to the function,
+        the name of a variable that contains <span class="function">Hello</span> is
+        passed instead.</p>
+      <blockquote>
+        <p class="function">1. @echo off &amp; setlocal ENABLEEXTENSIONS <br>
+    2. set str=Hello<br>
+    3. call :demoB str<br>
+    4. goto :EOF<br>
+    5.<br>
+    6. :demoB<br>
+    7. call echo/%%%1%%<br>
+    8. goto :EOF</p>
+      </blockquote>      
+      <p>Inside the function <span class="function">demoB</span>, <span class="function">%1</span> expands
+        to <span class="function">str</span>. To read the value contained in <span class="function">str</span>,
+        it is necessary to enclose
+        <span class="function">%1</span> with double percents and instruct the
+        command interpreter to perform another expansion. This is most easily
+        accomplished by using the <span class="function">CALL</span> command
+        as shown in line 7. For a detailed explanation of variable expansion,
+        see the thread in alt.msdos.batch.nt titled &quot;<a href="http://groups.google.co.uk/groups?hl=en&amp;lr=&amp;ie=UTF-8&amp;oe=UTF8&amp;threadm=01c192d1%241ba56990%240125250a%40aiyvzvwkvtdqrqbf&amp;rnum=1&amp;prev=/groups%3Fhl%3Den%26ie%3DUTF-8%26oe%3DUTF8%26q%3D%2522variable%2Bexpansion%2B(w2ksp2)%2522%26sa%3DN%26tab%3Dwg%26meta%3D" target="_blank">Variable
+        expansion (W2KSP2)</a>&quot;.</p>
+      <p>Why would we want to pass arguments like this? Well now
+          that the function knows the name of a variable, it can assign
+        it a value  and thereby the function can now return values.</p>
+      <p class="heading">Returning Values</p>      
+      <p>So far the contrived examples have only served to illustrate
+        the points being made. This next example demonstrates  how a function
+        can return a value and is typical of the functions in this library. The
+        methods used guarantee this function can be inserted, as it stands, into
+        any batch file without causing any side effects whatsoever.</p>
+      <p>The function  below is called <span class="function">Area</span> and
+        it simply calculates the product of width and height and then returns
+        the result. Three arguments are required, the first two should be passed
+        by value, the third by reference.</p>
+      <p class="style1">[It is a convention of this library to
+          document a function's arguments by including an argument
+        list immediately after the function name (as shown below on
+        line 08). This is a convenient location as anything after the function
+        name is ignored by the command interpreter. This list serves no other
+        purpose than to act as a reminder of the type and number of arguments
+        a function expects.]</p>      
+      <blockquote>
+        <p class="function">01.&nbsp;@echo off &amp; setlocal ENABLEEXTENSIONS<br>
+          02.&nbsp;set x=2<br>
+          03.&nbsp;set y=3<br>
+          04.&nbsp;call :Area %x% %y% answer<br>
+          05.&nbsp;echo/The area is: %answer%<br>
+          06.&nbsp;goto :EOF<br>
+          07.&nbsp;<br>
+          08.&nbsp;:Area %width% %height% result<br>
+          09.&nbsp;setlocal<br>
+          10.&nbsp;set /a res=%1*%2<br>
+          11.&nbsp;endlocal &amp; set &quot;%3=%res%&quot;<br>
+          12.  goto :EOF</p>
+      </blockquote>
+      <p>Line 04 calls the <span class="function">Area</span> function passing
+        three arguments (it could equally have read <span class="function">call&nbsp;:Area&nbsp;2&nbsp;3&nbsp;</span><span class="function">answer</span>).
+        The first command of the function (line 09) is <span class="function">setlocal</span>.
+        This command creates a copy of the current environment and this copy
+        then <em>becomes</em> the
+          current environment. Line 10 calculates the product of arguments <span class="function">%1</span> and <span class="function">%2</span> and
+          saves the result in the variable called <span class="function">res</span>.</p>
+      <p>The next line consists of two commands seperated by an ampersand (<span class="function">&amp;</span>).
+      This causes the command interpreter to expand  both commands and then
+        execute them one after the other. So line 11, after it has been expanded
+        equates to <span class="function">endlocal&nbsp;&amp;&nbsp;set&nbsp;&quot;answer=6&quot;</span>.
+        Now the <span class="function">endlocal</span> command is executed, which
+        deletes the copy of the environment created by the most recent <span class="function">setlocal</span> command,
+        and restores the previous environent. Then <span class="function">set&nbsp;&quot;answer=6&quot;</span> is
+        executed, and finally on line 12 <span class="function">goto&nbsp;:EOF</span> exits
+        the function and execution continues at line 05. The net result is that
+        the <span class="function">Area</span> function has returned a value. </p>
+      <p> If on line 11, the command
+         <span class="function">set&nbsp;&quot;%3=%res%&quot;</span>, had been
+         expanded <em>after</em> <span class="function">endlocal</span> had been
+         executed, then instead of expanding to <span class="function">set&nbsp;&quot;answer=6&quot;</span> it
+        probably would have been <span class="function">set&nbsp;&quot;answer=&quot;</span> as the
+        <span class="function">res</span> variable was deleted by the <span class="function">endlocal</span>        command.</p>
+      <p class="heading">By Value or Reference</p>
+      <p>The rule of thumb is to pass arguments by
+        value unless you need to modify the original values, in which case pass
+        by reference. The <span class="function">Area</span> function above demonstrates
+        this rule as the first and second arguments (width and height) are passed
+        by value, but in order to assign the result of the calculation to the
+        <span class="function">answer</span> variable, it was passed to the function
+        by reference.</p>
+      <p>Sometimes it's necessary to pass arguments by reference even though
+        read-only access is required. For example, when passing two or more unquoted
+        arguments where at least one of them contains whitespace, the function
+        would not be able to determine which argument was which if they had been
+        passed by value. Calling by reference can also be used to pass arguments
+        containing so-called 'poison' characters (such as &quot; ! | &lt; &gt; ^ &quot; &amp; %).</p>      <p class="heading">Protecting
+          out of Scope Variables</p>
+      <p> In order to create truely reusable functions, you must ensure that
+        they do not unintentionally modify variables outside of their own scope.
+        This is accomplished by enclosing your function's main routine with the
+        <span class="function">setlocal</span> and <span class="function">endlocal</span> statements as shown in the example above.</p>      
+      <p>Unfortunately things get a little more complicated when two or more
+        arguments are passed by reference <em>and</em> those arguments need to
+        be read by your function (as opposed to just being assigned values).
+        This is best illustrated by the <span class="function">Swap</span> function
+        shown below. </p>
+      <p class="heading">Protecting Arguments</p>      
+      <p> When passing two or more arguments by reference where those arguments
+        need to be read, care must
+        be taken not to destroy any of the arguments before they have <em>all</em> been
+        read. Consider this example below. </p>      <blockquote>
+          <blockquote>
+            <p class="function">01. @echo off &amp; setlocal ENABLEEXTENSIONS<br>
+            02. set a=one<br>
+            03. set b=two<br>
+            04. echo/Before call&nbsp;&nbsp;:swap a b [%a% %b%]<br>
+            05. call :Swap a b<br>
+            06. echo/After call 1 :swap a b [%a% %b%]<br>
+            07. call :Swap b a<br>
+            08. echo/After call 2 :swap b a [%a% %b%]<br>
+            09.<br>
+            10. goto :EOF<br>
+            11.<br>
+            12. :Swap<br>
+            13. setlocal<br>
+            14. call set a=%%%1%%<br>
+            15. call set b=%%%2%%<br>
+            16. endlocal &amp; set &quot;%1=%b%&quot; &amp; set &quot;%2=%a%&quot; &amp; goto
+            :EOF</p>
+          </blockquote>
+        </blockquote>
+      <p>The above example displays:-</p>
+      <blockquote> 
+        <p class="function">Before call&nbsp;&nbsp;:swap a b [one two]<br>
+          After call 1 :swap a b [two one]<br>
+          After call 2 :swap b a [one one]</p>
+      </blockquote>
+      <p>This function is supposed to swap the contents of two variables. Notice
+        it succeed the first time, but failed on the second. This was caused
+        by variable names outside of the function clashing with duplicate names
+        inside the function. Specifically, this is what went wrong:-</p>
+      <ul>
+        <li>Line 07 called <span class="function">Swap</span>, the first argument
+              is <span class="function">b</span>, the second <span class="function">a</span>.</li>
+        <li>Line 14 is  expanded twice because of the <span class="function">call</span> command,
+              after the second expansion, the line equates to <span class="function">set&nbsp;a=one</span>,
+              and once this command is executed, <span class="function">a</span> is
+              overwritten.</li>
+        <li>Line 15 is also expanded twice and equates
+            to <span class="function">set&nbsp;b=one</span>, in other
+          words both <span class="function">a</span> and <span class="function">b</span> are
+                    now the <span class="function">one</span> </li>
+      </ul>      <p>The usual workaround for this problem is to use variable names that are 
+        unique to your function by preceeding all function variables with the 
+        function name separated by a period. However, if using that approach, 
+        it's actually only necessary to use unique names for vulnerable variables. 
+        Rewriting lines 14-16 of the Area function as shown below would prevent 
+        any arguments being overwritten before they had been saved.</p>
+      <blockquote> 
+        <p><span class="batch">14. call set Swap.a=%%%1%%<br>
+          15. call set b=%%%2%%<br>
+          16. endlocal&amp;set %1=%b%&amp;set %2=%Swap.a%&amp;goto :EOF</span></p>
+      </blockquote>
+      <p></p>
+      <p>This method has several drawbacks. Firstly, you must never use a period 
+        in any variable name outside of your functions. Secondly, if the function 
+        doesn't have a really short name and reads a number of variables by reference, 
+        the number of lines of code in the function can double if you want to 
+        avoid 'long' lines of code.</p>
+      <p>An alternative method is to read the variables with the FOR /F command 
+        using a delimiter character not present in any of the argument values. 
+        Using this method the Swap function could be rewritten as follows:-</p>
+      <blockquote>
+        <p class="batch">12. :Swap<br>
+          13. setlocal ENABLEEXTENSIONS<br>
+          14. for /f &quot;tokens=1-2 delims=&not;&quot; %%a in ('echo/%%%1%%&not;%%%2%%') 
+          do (<br>
+          15. &nbsp;&nbsp;set a=%%a&amp;set b=%%b<br>
+          16. )<br>
+          17. endlocal&amp;set %1=%b%&amp;set %2=%a%&amp;goto :EOF</p>
+      </blockquote>
+      <p>The delimiter character is a '&not;' (ASCII 172, which looks like a back-to-front 
+        'L' on its side). It was chosen because it's rarely used and it appears 
+        on a UK keyboard (above the TAB key). If you don't have this key, you 
+        can type it by holding down the Alt key and typing 172 on the numeric 
+        keypad. The only drawback of this method being your variables must never 
+        contain the delimiter character otherwise you may obtain incorrect results.</p>
+      <p>This issue was covered in alt.msdos.batch.nt in a thread titled &quot;<a href="http://groups.google.co.uk/groups?hl=en&amp;lr=&amp;ie=UTF-8&amp;oe=UTF8&amp;threadm=3d0861ca_2%40mk-nntp-1.news.uk.worldonline.com&amp;rnum=3&amp;prev=/groups%3Fhl%3Den%26lr%3D%26ie%3DUTF-8%26oe%3DUTF8%26selm%3D3d0861ca_2%2540mk-nntp-1.news.uk.worldonline.com%26rnum%3D3" target="_blank">Function 
+    parameters</a>&quot;.</p>    </td>
+  </tr>
+</table>
+</body>
+</html>
