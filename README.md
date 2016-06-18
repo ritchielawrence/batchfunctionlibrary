@@ -23,7 +23,7 @@ Originally conceived in 2002 as a web based library of date and time conversion 
 ### Date and Time Functions<a name="date-and-time-functions"></a>
 
 Function | Description
----|---|---
+---|---
 DateToDays | Converts a calendar date to the number of days elapsed since 1970-01-01
 DateToDOW | Returns the day of week number for a given calendar date
 DateToMins | Converts a calendar date to the number of minutes elapsed since 1970-01-01 00:00
@@ -47,7 +47,7 @@ WeekToDate | Returns a calendar date from an ISO 8601 Week date
 ### File and Directory Functions<a name="file-and-directory-functions"></a>
 
 Function | Description
----|---|---
+---|---
 FileSizeComp | Compares the size of a specified file
 GetDirStats | Returns the number of files, subdirectories and total size of a specified directory
 IsDirEmpty | Determines if the specified directory is empty
@@ -56,7 +56,7 @@ IsInPath | Determines if the specified files are in the current directory or in 
 ### Network Functions<a name="network-functions"></a>
 
 Function | Description
----|---|---
+---|---
 GetDG | Returns the default gateway
 GetIP | Returns the IP address of the primary adapter
 GetMAC | Returns the MAC address of the primary adapter
@@ -66,7 +66,7 @@ GetSM | Returns the subnet mask of the primary adapter
 ### System Functions<a name="system-functions"></a>
 
 Function | Description
----|---|---
+---|---
 GetOS | Returns the operating system version
 IsRunning | Determines if the specified service is running
 Sleep | Suspends execution of the current batch file for a specified interval
