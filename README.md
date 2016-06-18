@@ -14,7 +14,7 @@
 
 ## About<a name="about"></a>
 
-Originally conceived in 2002 as a web based collection of date and time conversion functions, the library now also includes file, network and system functions. The library is no longer actively developed and his now archived on Github for prosperity.
+Originally conceived in 2002 as a web based library of date and time conversion functions, the library now also includes file, network and system functions. The library is no longer developed and is now archived on Github.
 
 ## Synopsis<a name="synopsis"></a>
 
@@ -72,6 +72,12 @@ IsRunning | Determines if the specified service is running
 Sleep | Suspends execution of the current batch file for a specified interval
 Timer | Returns the number of elapsed seconds since the function was last called and first called
 Uptime | Returns the elapsed days, hours, minutes and seconds since the system booted
+
+## Revisions<a name="revisions"></a>
+
+Revision | Date | Changes
+---|---|---
+1.0 | 2016-06-18 | The webpages that make up the library have been removed from [www.commandline.co.uk](http://www.commandline.co.uk/) and archived at Github.
 
 ## Copyright and License<a name="copyright-and-license"></a>
 
