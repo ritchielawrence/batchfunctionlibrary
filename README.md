@@ -4,7 +4,7 @@
 
 * [About](#about)
 * [Usage](#usage)
-* [Index of Functions](#index-of-functions)
+* [Library Contents](#library-contents)
   - [Tutorials](#tutorials)
   - [Date and Time Functions](#date-and-time-functions)
   - [File and Directory Functions](#file-and-directory-functions)
@@ -21,7 +21,7 @@ This web based library was created in 2002 and featured a collection of date and
 
 Download and extract the archive, open the page of interest in a browser. Copy and paste the function to use in a batch file.
 
-## Index of Functions<a name="index-of-functions"></a>
+## Library Contents<a name="library-contents"></a>
 
 ### Tutorials<a name="tutorials"></a>
 
