@@ -3,8 +3,9 @@
 ## Table of Contents
 
 * [About](#about)
-* [Synopsis](#synopsis)
+* [Usage](#usage)
 * [Index of Functions](#index-of-functions)
+  - [Tutorials](#tutorials)
   - [Date and Time Functions](#date-and-time-functions)
   - [File and Directory Functions](#file-and-directory-functions)
   - [Network Functions](#network-functions)
@@ -14,11 +15,22 @@
 
 ## About<a name="about"></a>
 
-Originally conceived in 2002 as a web based library of date and time conversion functions, the library now also includes file, network and system functions. The library is no longer developed and is now archived on Github.
+This web based library was created in 2002 and featured a collection of date and time conversion functions. Later additions includes file, network and system functions. The library is no longer developed and is now archived on Github. Note, the webpages were designed for display in a treeview which itself was written in PHP/Javascript. The treeview code has largely been removed. Some of the internal hyperlinks might be broken, but you should have little trouble finding the target page. Happy batching!
 
-## Synopsis<a name="synopsis"></a>
+## Usage<a name="usage"></a>
+
+Download and extract the archive, open the page of interest in a browser. Copy and paste the function to use in a batch file.
 
 ## Index of Functions<a name="index-of-functions"></a>
+
+### Tutorials<a name="tutorials"></a>
+
+Title | Description
+---|---
+Batch Function Overview | What are they, why use them, and what do they look like?
+Using the Functions | How to use the functions, with examples.
+Batch Functions Explained | Detailed examination of batch functions.
+Reading Files | How to read lines from any position in a file.
 
 ### Date and Time Functions<a name="date-and-time-functions"></a>
 
