@@ -22,9 +22,258 @@
       <h1>
 <a id="batch-function-library" class="anchor" href="#batch-function-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Batch Function Library</h1>
 
-<p>Library of Windows batch functions.</p>
+<h2>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table of Contents</h2>
 
-<p>This site will be complete by 2016-06-17</p>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#synopsis">Synopsis</a></li>
+<li>
+<a href="#index-of-functions">Index of Functions</a>
+
+<ul>
+<li><a href="#date-and-time-functions">Date and Time Functions</a></li>
+<li><a href="#file-and-directory-functions">File and Directory Functions</a></li>
+<li><a href="#network-functions">Network Functions</a></li>
+<li><a href="#system-functions">System Functions</a></li>
+</ul>
+</li>
+<li><a href="#revisions">Revisions</a></li>
+<li><a href="#copyright-and-license">Copyright and License</a></li>
+</ul>
+
+<h2>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About<a name="about"></a>
+</h2>
+
+<p>Originally conceived in 2002 as a web based library of date and time conversion functions, the library now also includes file, network and system functions. The library is no longer developed and is now archived on Github.</p>
+
+<h2>
+<a id="synopsis" class="anchor" href="#synopsis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Synopsis<a name="synopsis"></a>
+</h2>
+
+<h2>
+<a id="index-of-functions" class="anchor" href="#index-of-functions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Index of Functions<a name="index-of-functions"></a>
+</h2>
+
+<h3>
+<a id="date-and-time-functions" class="anchor" href="#date-and-time-functions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Date and Time Functions<a name="date-and-time-functions"></a>
+</h3>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DateToDays</td>
+<td>Converts a calendar date to the number of days elapsed since 1970-01-01</td>
+</tr>
+<tr>
+<td>DateToDOW</td>
+<td>Returns the day of week number for a given calendar date</td>
+</tr>
+<tr>
+<td>DateToMins</td>
+<td>Converts a calendar date to the number of minutes elapsed since 1970-01-01 00:00</td>
+</tr>
+<tr>
+<td>DateToMJD</td>
+<td>Converts a UTC date to a Modified Julian Day</td>
+</tr>
+<tr>
+<td>DateToOrdinal</td>
+<td>Returns an ordinal date from a calendar date as described by ISO 8601</td>
+</tr>
+<tr>
+<td>DateToSecs</td>
+<td>Converts a calendar date to the number of seconds elapsed since 1970-01-01 00:00:00</td>
+</tr>
+<tr>
+<td>DateToWeek</td>
+<td>Returns an ISO 8601 Week date from a calendar date</td>
+</tr>
+<tr>
+<td>DayName</td>
+<td>Returns the name of the day of week from the day of week number</td>
+</tr>
+<tr>
+<td>DayNumber</td>
+<td>Returns the number of the day of week from the day of week name</td>
+</tr>
+<tr>
+<td>DaysToDate</td>
+<td>Converts the number of days elapsed since 1970-01-01 to a calendar date</td>
+</tr>
+<tr>
+<td>GetDate</td>
+<td>Returns the local system date</td>
+</tr>
+<tr>
+<td>GetTime</td>
+<td>Returns the local system time</td>
+</tr>
+<tr>
+<td>MinsToDate</td>
+<td>Converts the number of minutes elapsed since 1970-01-01 00:00 to a calendar date and time</td>
+</tr>
+<tr>
+<td>MJDToDate</td>
+<td>Converts a Modified Julian Day to a UTC date</td>
+</tr>
+<tr>
+<td>MonthName</td>
+<td>Returns the name of month from the month number</td>
+</tr>
+<tr>
+<td>MonthNumber</td>
+<td>Returns the number of month from a month name</td>
+</tr>
+<tr>
+<td>OrdinalToDate</td>
+<td>Returns a calendar date from an ISO 8601 Ordinal date</td>
+</tr>
+<tr>
+<td>SecsToDate</td>
+<td>Converts the number of seconds elapsed since 1970-01-01 00:00:00 to a calendar date and time</td>
+</tr>
+<tr>
+<td>WeekToDate</td>
+<td>Returns a calendar date from an ISO 8601 Week date</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="file-and-directory-functions" class="anchor" href="#file-and-directory-functions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>File and Directory Functions<a name="file-and-directory-functions"></a>
+</h3>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FileSizeComp</td>
+<td>Compares the size of a specified file</td>
+</tr>
+<tr>
+<td>GetDirStats</td>
+<td>Returns the number of files, subdirectories and total size of a specified directory</td>
+</tr>
+<tr>
+<td>IsDirEmpty</td>
+<td>Determines if the specified directory is empty</td>
+</tr>
+<tr>
+<td>IsInPath</td>
+<td>Determines if the specified files are in the current directory or in a directory listed in the path statement</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="network-functions" class="anchor" href="#network-functions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Network Functions<a name="network-functions"></a>
+</h3>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetDG</td>
+<td>Returns the default gateway</td>
+</tr>
+<tr>
+<td>GetIP</td>
+<td>Returns the IP address of the primary adapter</td>
+</tr>
+<tr>
+<td>GetMAC</td>
+<td>Returns the MAC address of the primary adapter</td>
+</tr>
+<tr>
+<td>GetNA</td>
+<td>Returns the network address of the primary adapter</td>
+</tr>
+<tr>
+<td>GetSM</td>
+<td>Returns the subnet mask of the primary adapter</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="system-functions" class="anchor" href="#system-functions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>System Functions<a name="system-functions"></a>
+</h3>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetOS</td>
+<td>Returns the operating system version</td>
+</tr>
+<tr>
+<td>IsRunning</td>
+<td>Determines if the specified service is running</td>
+</tr>
+<tr>
+<td>Sleep</td>
+<td>Suspends execution of the current batch file for a specified interval</td>
+</tr>
+<tr>
+<td>Timer</td>
+<td>Returns the number of elapsed seconds since the function was last called and first called</td>
+</tr>
+<tr>
+<td>Uptime</td>
+<td>Returns the elapsed days, hours, minutes and seconds since the system booted</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="revisions" class="anchor" href="#revisions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Revisions<a name="revisions"></a>
+</h2>
+
+<table>
+<thead>
+<tr>
+<th>Revision</th>
+<th>Date</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2016-06-18</td>
+<td>The webpages that make up the library have been removed from <a href="http://www.commandline.co.uk/">www.commandline.co.uk</a> and archived at Github.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="copyright-and-license" class="anchor" href="#copyright-and-license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Copyright and License<a name="copyright-and-license"></a>
+</h2>
+
+<p>Code and documentation copyright 2002-2016 Ritchie Lawrence. Code released under <a href="https://github.com/ritchielawrence/mtee/blob/master/LICENSE.txt">MIT License</a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/ritchielawrence/batchfunctionlibrary">Batchfunctionlibrary</a> is maintained by <a href="https://github.com/ritchielawrence">ritchielawrence</a>.</span>
