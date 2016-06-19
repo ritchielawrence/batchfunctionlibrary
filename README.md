@@ -1,5 +1,3 @@
-# Batch Function Library
-
 ## Table of Contents
 
 * [About](#about)
